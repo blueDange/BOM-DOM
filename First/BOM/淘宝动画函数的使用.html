@@ -1,0 +1,70 @@
+<!--
+ * @Author: blueDange 672074694@qq.com
+ * @Date: 2022-08-23 16:47:10
+ * @LastEditors: blueDange 672074694@qq.com
+ * @LastEditTime: 2022-08-23 17:34:12
+ * @FilePath: \BOM\淘宝动画函数的使用.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .sliderbar {
+        width: 40px;
+        height: 100px;
+        background-color: pink;
+        position: fixed;
+        top: 500px;
+        right: 0;
+      }
+      .sliderbar span {
+        position: absolute;
+        display: block;
+        width: 40px;
+        height: 40px;
+        /* left: 50%;
+        margin-left: 500px; */
+        background-color: skyblue;
+        z-index: 99;
+      }
+      .sliderbar .con {
+        position: absolute;
+        width: 100px;
+        height: 40px;
+        /* left: 50%;
+        margin-left: 500px; */
+        background-color: purple;
+        z-index: 1;
+      }
+    </style>
+    <script src="./js/animate.js"></script>
+  </head>
+  <body>
+    <div class="sliderbar">
+      <span>←</span>
+      <div class="con">问题反馈</div>
+    </div>
+    <script>
+      var sliderbar = document.querySelector(".sliderbar");
+      var con = document.querySelector(".con");
+      // 当我们鼠标经过 sliderbar 就会让 con这个盒子滑动到左侧
+      // 当我们鼠标离开 sliderbar 就会让 con这个盒子滑动到右侧
+      sliderbar.addEventListener("mouseenter", function () {
+        animate(con, -60, function () {
+          // 当我们动画执行完毕, 就把 ← 改为 →
+          sliderbar.children[0].innerHTML = "→";
+        });
+      });
+      sliderbar.addEventListener("mouseleave", function () {
+        animate(con, 0, function () {
+          sliderbar.children[0].innerHTML = "←";
+        });
+      });
+    </script>
+  </body>
+</html>

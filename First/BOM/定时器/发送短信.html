@@ -1,0 +1,44 @@
+<!--
+ * @Author: blueDange 672074694@qq.com
+ * @Date: 2022-08-22 10:54:15
+ * @LastEditors: blueDange 672074694@qq.com
+ * @LastEditTime: 2022-08-22 11:10:17
+ * @FilePath: \BOM\定时器\发送短信.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!--
+        1.button的值修改要通过innerHTML;
+        2.里面秒数是有变化的 所以需要计时器
+        3.计时器里面的秒数是递减的
+        4.到了0秒得时候 我们需要停止定时器,并复原按钮初始状态
+     -->
+    <input type="number" /> <button>发送短信</button>
+    <script>
+      var btn = document.querySelector("button");
+      var t = 3;
+      btn.addEventListener("click", function () {
+        btn.disabled = true;
+        var timer = setInterval(function () {
+          if (t == 0) {
+            clearInterval(timer);
+            btn.disabled = false;
+            btn.innerHTML = "发送";
+            t = 3; // 这个3 需要重新开始
+          } else {
+            btn.innerHTML = "还剩下" + t + "秒";
+            t--;
+          }
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!--
+ * @Author: blueDange 672074694@qq.com
+ * @Date: 2022-08-23 11:38:42
+ * @LastEditors: blueDange 672074694@qq.com
+ * @LastEditTime: 2022-08-24 15:59:14
+ * @FilePath: \BOM\仿淘宝固定侧边栏.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .w {
+            width: 1000px;
+            margin-top: 10px;
+            
+        }
+        .header{
+            height: 200px;
+            background-color: pink;
+            position: relative;
+        }
+        .banner {
+            height: 300px;
+            background-color: skyblue;
+        }
+        .main {
+            height: 2000px;
+            background-color: purple;
+        }
+        .slider-bar {
+            width: 50px;
+            height: 100px;
+            position: absolute;
+            background-color: yellowgreen;
+            left: 1008px;
+            top: 260px;
+            
+        }
+        span {
+            position: absolute;
+            bottom: 0;
+            display: none;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="slider-bar">
+      <span class="goback">返回顶部</span>
+    </div>
+    <div class="header w">头部区域</div></div>
+    <div class="banner w">banner区域</div>
+    <div class="main w">主题部分</div>
+    <script>
+        var sliderbar = document.querySelector('.slider-bar')
+       var banner = document.querySelector('.banner')
+       var bannerTop = banner.offsetTop;
+       var sliderbarTop = sliderbar.offsetTop - bannerTop 
+       var goback = document.querySelector('.goback');
+       var main = document.querySelector('.main')
+       var mainTop = main.offsetTop;
+       document.addEventListener('scroll',function(){
+            console.log(window.pageYOffset); //页面被卷去的头部
+            // 2.当我们的页面被卷去的头部大于 328 此时侧边栏改为固定定位
+            if(window.pageYOffset>=bannerTop) {
+                sliderbar.style.position = 'fixed'
+                sliderbar.style.top = sliderbarTop + 'px'
+            } else {
+                sliderbar.style.position = 'absolute'
+                sliderbar.style.top = '260px'
+            }
+            // 当我们页面滚动到main盒子,就显示 goback盒子
+            if(window.pageYOffset>=mainTop) {
+                goback.style.display = 'block'
+            } else {
+                goback.style.display = 'none '
+            }
+        })
+        goback.addEventListener('click', function() {
+            animate(window,0)
+        })
+function animate(obj, target,) {
+  // console.log(callback);  callback = function() {}  调用的时候 callback()
+
+  // 先清除以前的定时器，只保留当前的一个定时器执行
+  clearInterval(obj.timer);
+  obj.timer = setInterval(function() {
+      // 步长值写到定时器的里面
+      // 把我们步长值改为整数 不要出现小数的问题
+      // var step = Math.ceil((target - obj.offsetLeft) / 10);
+      var step = (target - window.pageYOffset) / 10;
+      step = step > 0 ? Math.ceil(step) : Math.floor(step);
+      if (window.pageYOffset == target) {
+          // 停止动画 本质是停止定时器
+          clearInterval(obj.timer);
+          // 回调函数写到定时器结束里面
+          // if (callback) {
+          //     // 调用函数
+          //     callback();
+          // }
+          callback && callback();
+      }
+      // 把每次加1 这个步长值改为一个慢慢变小的值  步长公式：(目标值 - 现在的位置) / 10
+    //   obj.style.left = obj.offsetTop + step + 'px';
+      window,scroll(0,window.pageYOffset + step)
+  }, 15);
+}
+    </script>
+  </body>
+</html>

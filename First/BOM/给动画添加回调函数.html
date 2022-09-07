@@ -1,0 +1,70 @@
+<!--
+ * @Author: blueDange 672074694@qq.com
+ * @Date: 2022-08-23 15:50:07
+ * @LastEditors: blueDange 672074694@qq.com
+ * @LastEditTime: 2022-08-23 16:30:31
+ * @FilePath: \BOM\给动画添加回调函数.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      span {
+        top: 200px;
+        left: 0;
+        width: 300px;
+        height: 300px;
+        background-color: pink;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <span>夏雨荷</span>
+    <button class="btn500">移动500</button>
+    <button class="btn800">移动800</button>
+    <script>
+      //1. 让盒子的距离 速度慢慢变小
+      // 2.核心算法: (目标值 - 现在的位置) / 10 作为每次移动的距离
+      // 3. 停止的条件是: 让当前的盒子位置等于目标位置就停止定时器
+      function animate(obj, target, callback) {
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function () {
+          // 步长我们写到定时器的里面
+          // 把我的步长值改为整数 不要出现小数的问题
+          // var step =(target - obj.offsetLeft) / 10;
+          var step = (target - obj.offsetLeft) / 10;
+          step = step > 0 ? Math.ceil(step) : Math.floor(step);
+          if (obj.offsetLeft == target) {
+            // 停止动画 本质是停止定时器
+            clearInterval(obj.timer);
+            // 回调函数写在定时器结束里面
+            if (callback) {
+              // 调用函数
+              callback();
+            }
+          } else {
+            // 把每次加1 这个步长值改为一个慢慢变小的值 步长公式: (目标值 - 现在位置) /10
+            obj.style.left = obj.offsetLeft + step + "px";
+          }
+        }, 15);
+      }
+      var span = document.querySelector("span");
+      var btn500 = document.querySelector(".btn500");
+      var btn800 = document.querySelector(".btn800");
+      btn500.addEventListener("click", function () {
+        animate(span, 500);
+      });
+      btn800.addEventListener("click", function () {
+        animate(span, 800, function () {
+          alert("guigui");
+        });
+      });
+    </script>
+  </body>
+</html>
