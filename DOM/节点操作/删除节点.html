@@ -1,0 +1,33 @@
+<!--
+ * @Author: blueDange 672074694@qq.com
+ * @Date: 2022-08-18 21:52:49
+ * @LastEditors: blueDange 672074694@qq.com
+ * @LastEditTime: 2022-08-18 21:59:32
+ * @FilePath: \DOM\节点操作\删除节点.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button>anniu</button>
+    <ul>
+      <li>熊大</li>
+      <li>熊二</li>
+      <li>熊三</li>
+      <li>熊四</li>
+    </ul>
+    <script>
+      var ul = document.querySelector("ul");
+      var btn = document.querySelector("button");
+      btn.onclick = function () {
+        ul.removeChild(ul.children[0]);
+      };
+    </script>
+  </body>
+</html>

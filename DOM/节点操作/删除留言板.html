@@ -1,0 +1,53 @@
+<!--
+ * @Author: blueDange 672074694@qq.com
+ * @Date: 2022-08-18 21:45:06
+ * @LastEditors: blueDange 672074694@qq.com
+ * @LastEditTime: 2022-08-19 09:07:42
+ * @FilePath: \DOM\节点操作\添加节点.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      ul,
+      li {
+        list-style: none;
+      }
+      li {
+        width: 200px;
+        height: 20px;
+
+        border: 1px solid black;
+        background-color: skyblue;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <button>按钮</button>
+    <ul></ul>
+
+    <script>
+      var text = document.querySelector("textarea");
+      var ul = document.querySelector("ul");
+      var btn = document.querySelector("button");
+      btn.onclick = function () {
+        var li = document.createElement("li");
+        li.innerHTML = text.value + "<a href='javascript:;'>删除</a>";
+        ul.insertBefore(li, ul.children[0]);
+        var as = document.querySelectorAll("a");
+        for (var i = 0; i < as.length; i++) {
+          as[i].onclick = function () {
+            ul.removeChild(this.parentNode);
+          };
+        }
+      };
+    </script>
+  </body>
+</html>
