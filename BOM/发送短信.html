@@ -1,0 +1,38 @@
+<!--
+ * @Author: blueDange 672074694@qq.com
+ * @Date: 2022-08-23 09:33:29
+ * @LastEditors: blueDange 672074694@qq.com
+ * @LastEditTime: 2022-08-23 09:46:55
+ * @FilePath: \BOM\发送短信.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="number" /> <button>发送短信</button>
+    <script>
+      var btn = document.querySelector("button");
+      var time = 3;
+      btn.addEventListener("click", function () {
+        btn.disabled = true;
+        var timer = setInterval(function () {
+          if (time == 0) {
+            btn.disabled = false;
+            btn.innerHTML = "发送";
+            clearInterval(timer);
+            time = 3;
+          } else {
+            btn.innerHTML = "还剩下" + time + "秒";
+            time--;
+          }
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>
